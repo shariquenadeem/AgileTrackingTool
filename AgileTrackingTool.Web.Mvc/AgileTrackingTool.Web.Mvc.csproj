@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\AgileTrackingTool.Web.API\AgileTrackingTool.Web.API.csproj" />
   </ItemGroup>
 
 
