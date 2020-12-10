@@ -7,7 +7,7 @@ namespace AgileTrackingTool.Web.Mvc.Services
 {
     public class ServiceClientManager : IServiceClientManager
     {
-        private readonly string serverUrl = "http://localhost:60464/api/rally/";
+        private readonly string serverUrl = "https://localhost:44309/api/rally/";
         public ServiceClientManager()
         {
 
@@ -37,28 +37,19 @@ namespace AgileTrackingTool.Web.Mvc.Services
         {
             using (var client = new HttpClient())
             {
+                
                 client.BaseAddress = new Uri(serverUrl);
-                //HTTP GET
-                var responseTask = client.GetAsync("authorized/{username}/{password}");
+                var responseTask = client.GetAsync(string.Concat(serverUrl,(string.Format("authorized/{0}/{1}", username, password))));
                 responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-
-                    //var readTask = result.Content.ReadAsAsync();
-                    //readTask.Wait();
-
-                    //var students = readTask.Result;
-
-                    //foreach (var student in students)
-                    //{
-                    //    Console.WriteLine(student.Name);
-                    //}
+                    return true;
                 }
+
+                return false;
             }
-            //Console.ReadLine();
-            return true;
         }
     }
 }
