@@ -12,8 +12,8 @@ namespace AgileTrackingTool.Web.API.Models
         public string AssignedOwner { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public string CreatedDate { get; set; }
+        public string UpdatedDate { get; set; }
         public IEnumerable<TaskDetails> Tasks { get; set; }
     }
 }

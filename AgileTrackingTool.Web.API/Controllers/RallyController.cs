@@ -30,8 +30,8 @@ namespace AgileTrackingTool.Web.API.Controllers
         [HttpGet]
         public IEnumerable<UserStoriesDetails> GetUserStoriesAndTaskAssigned(string username, string password)
         {
-            var response = new List<UserStoriesDetails>();
-            //var _rallyService.GetCurrentUserInfo
+            var response = _rallyService.GetStoriesByUser(username, password);
+
 
 
             return response;
@@ -43,6 +43,19 @@ namespace AgileTrackingTool.Web.API.Controllers
         {
             var response = _rallyService.GetCurrentUserInfo(username, password);
            if(response != null)
+            {
+                return Ok(response);
+            }
+
+            return NotFound();
+        }
+
+        [Route("iteration/{username}/{password}/{project}")]
+        [HttpGet]
+        public IHttpActionResult GetAllIterations(string username, string password, string project)
+        {
+            var response = _rallyService.GetIterationDetails(username, password, project);
+            if (response != null)
             {
                 return Ok(response);
             }
