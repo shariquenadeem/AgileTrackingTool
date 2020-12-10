@@ -32,8 +32,6 @@ namespace AgileTrackingTool.Web.API.Controllers
         {
             var response = _rallyService.GetStoriesByUser(username, password);
 
-
-
             return response;
         }
 
@@ -55,6 +53,19 @@ namespace AgileTrackingTool.Web.API.Controllers
         public IHttpActionResult GetAllIterations(string username, string password, string project)
         {
             var response = _rallyService.GetIterationDetails(username, password, project);
+            if (response != null)
+            {
+                return Ok(response);
+            }
+
+            return NotFound();
+        }
+
+        [Route("projectDetails/{username}/{password}/{projectname}")]
+        [HttpGet]
+        public IHttpActionResult GetProjectDetails(string username, string password, string projectname)
+        {
+            var response = _rallyService.GetProjectDetails(username, password, projectname);
             if (response != null)
             {
                 return Ok(response);

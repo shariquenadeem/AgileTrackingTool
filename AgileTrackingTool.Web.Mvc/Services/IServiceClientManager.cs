@@ -10,7 +10,7 @@ namespace AgileTrackingTool.Web.Mvc.Services
     {
         UserInfo GetCurrentUserInfo(string username, string password);
         bool IsAuthorizeUser(string username, string password);
-        ProjectDetails GetProjectDetails(string projectName);
+        ProjectDetails GetProjectDetails(string username, string password,string projectName);
         IEnumerable<UserStoriesDetails> GetStoriesByUser(string username);
         IEnumerable<UserStoriesDetails> GetAllDetailsIteration();
     }

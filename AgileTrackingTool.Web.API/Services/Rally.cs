@@ -12,6 +12,7 @@ namespace AgileTrackingTool.Web.API.Services
     public class Rally
     {
         private RallyRestApi restApi;
+        public bool IsAuthenticated { get; set; }
         public Rally(string username, string password)
         {
             string serverUrl = "https://rally1.rallydev.com/";
@@ -21,7 +22,11 @@ namespace AgileTrackingTool.Web.API.Services
 
             if (restApi.AuthenticationState != RallyRestApi.AuthenticationResult.Authenticated)
             {
-                throw new Exception("Authentication Fail !");
+                IsAuthenticated = false;
+            }
+            else
+            {
+                IsAuthenticated = true;
             }
         }
 
@@ -102,6 +107,28 @@ namespace AgileTrackingTool.Web.API.Services
             Request itrRequest = new Request(project["Iterations"]);
             itrRequest.Limit = 10000; //project requests are made per workspace
             return restApi.Query(itrRequest);
+        }
+
+
+        public int GetTotalUserStories()
+        {
+            int storyCount = 0;
+            String projectRef = "/project/27874475461";     //replace this OID with an OID of your workspace
+
+            Request sRequest = new Request("HierarchicalRequirement");
+            sRequest.Project = projectRef;
+            sRequest.Fetch = new List<string>() { "FormattedID", "Name", "Tasks" };
+            //sRequest.Query = new Query("(Iteration.StartDate <= Today)");
+            sRequest.Limit = 100000;
+            QueryResult queryResults = restApi.Query(sRequest);
+
+
+            foreach (var s in queryResults.Results)
+            {
+                Console.WriteLine("FormattedID: " + s["FormattedID"] + " Name: " + s["Name"]);
+                storyCount++;
+            }
+            return storyCount;
         }
     }
 }

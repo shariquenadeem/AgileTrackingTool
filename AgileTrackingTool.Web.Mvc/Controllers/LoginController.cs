@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgileTrackingTool.Web.Mvc.Models;
 using AgileTrackingTool.Web.Mvc.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgileTrackingTool.Web.Mvc.Controllers
@@ -11,6 +12,7 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
     public class LoginController : Controller
     {
         private readonly IServiceClientManager _serviceClientManager = new ServiceClientManager();
+        
         public IActionResult Index()
         {
 
@@ -28,6 +30,8 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
                 var response = _serviceClientManager.IsAuthorizeUser(objuserlogin.UserName, objuserlogin.UserPassword);
                 if (response)
                 {
+                    HttpContext.Session.SetString("UserName", objuserlogin.UserName);
+                    HttpContext.Session.SetString("UserPassword", objuserlogin.UserPassword);
                     return RedirectToAction("Index", "Home");
                 }
 

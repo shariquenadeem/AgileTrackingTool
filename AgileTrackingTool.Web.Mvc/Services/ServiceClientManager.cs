@@ -1,4 +1,5 @@
 ﻿using AgileTrackingTool.Web.API.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -20,12 +21,44 @@ namespace AgileTrackingTool.Web.Mvc.Services
 
         public UserInfo GetCurrentUserInfo(string username, string password)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(serverUrl);
+                var responseTask = client.GetAsync(string.Concat(serverUrl, (string.Format("userinfo/{0}/{1}", username, password))));
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+
+                    return JsonConvert.DeserializeObject<UserInfo>(readTask.Result);
+                }
+
+                return new UserInfo();
+            }
         }
 
-        public ProjectDetails GetProjectDetails(string projectName)
+        public ProjectDetails GetProjectDetails(string username, string password, string projectName)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(serverUrl);
+                var responseTask = client.GetAsync(string.Concat(serverUrl, (string.Format("projectDetails/{0}/{1}/{2}", username, password, projectName))));
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+
+                    return JsonConvert.DeserializeObject<ProjectDetails>(readTask.Result);
+                }
+
+                return new ProjectDetails();
+            }
         }
 
         public IEnumerable<UserStoriesDetails> GetStoriesByUser(string username)

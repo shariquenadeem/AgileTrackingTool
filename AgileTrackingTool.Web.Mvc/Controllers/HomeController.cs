@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AgileTrackingTool.Web.Mvc.Models;
+using AgileTrackingTool.Web.Mvc.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace AgileTrackingTool.Web.Mvc.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly IServiceClientManager _serviceClientManager = new ServiceClientManager();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -20,7 +22,12 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            // Project details 
+            var username = HttpContext.Session.GetString("UserName");
+            var password = HttpContext.Session.GetString("UserPassword");
+            var projectName = "Sales ART - Team Calypso";
+            var response = _serviceClientManager.GetProjectDetails(username, password, projectName);
+            return View(response);
         }
 
         public IActionResult Privacy()

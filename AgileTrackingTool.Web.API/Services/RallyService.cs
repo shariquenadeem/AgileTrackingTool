@@ -21,16 +21,22 @@ namespace AgileTrackingTool.Web.API.Services
         public ProjectDetails GetProjectDetails(string username, string password, string projectName)
         {
             rally = new Rally(username, password);
-            var workspace = rally.GetAllWorkSpaces().Results.First();
-            var projects = rally.GetAllProjects(workspace);
-            var atlas = rally.GetProject(projectName, projects);
-            var defects = rally.GetAllDefects();
-            ProjectDetails projectDetails = new ProjectDetails();
-            projectDetails.TotalIteration = rally.GetItrs(atlas).Results.Count;
-            projectDetails.TotalUsers = rally.GetAllTeamMembers(atlas).Results.Count;
-            //projectDetails.TotalDefects = rally.GetAllTeamMembers(atlas).Results.Count;
+            if (rally.IsAuthenticated)
+            {
+                var workspace = rally.GetAllWorkSpaces().Results.First();
+                var projects = rally.GetAllProjects(workspace);
+                var atlas = rally.GetProject(projectName, projects);
+                var defects = rally.GetAllDefects();
+                ProjectDetails projectDetails = new ProjectDetails();
+                projectDetails.TotalIteration = rally.GetItrs(atlas).Results.Count;
+                projectDetails.TotalUsers = rally.GetAllTeamMembers(atlas).Results.Count;
+                projectDetails.TotalDefects = defects.Results.Count();
+                projectDetails.TotalUserStories = rally.GetTotalUserStories();
 
-            return projectDetails;
+                return projectDetails;
+            }
+
+            return null;
         }
 
         public IEnumerable<IterationDetails> GetIterationDetails(string username, string password, string projectName)
