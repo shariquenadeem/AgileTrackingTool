@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileTrackingTool.Web.Mvc", "AgileTrackingTool.Web.Mvc\AgileTrackingTool.Web.Mvc.csproj", "{1C8FBAAA-F89E-485D-9B64-D4248C7B8DF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileTrackingTool.Web.Mvc", "AgileTrackingTool.Web.Mvc\AgileTrackingTool.Web.Mvc.csproj", "{1C8FBAAA-F89E-485D-9B64-D4248C7B8DF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileTrackingTool.Web.API", "AgileTrackingTool.Web.API\AgileTrackingTool.Web.API.csproj", "{ADE1D7BF-8986-4496-8D81-DD0935EC5BAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileTrackingTool.Web.API", "AgileTrackingTool.Web.API\AgileTrackingTool.Web.API.csproj", "{D54E0E09-7B7B-4FE6-A107-2BB20122EDBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{1C8FBAAA-F89E-485D-9B64-D4248C7B8DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C8FBAAA-F89E-485D-9B64-D4248C7B8DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C8FBAAA-F89E-485D-9B64-D4248C7B8DF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADE1D7BF-8986-4496-8D81-DD0935EC5BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADE1D7BF-8986-4496-8D81-DD0935EC5BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADE1D7BF-8986-4496-8D81-DD0935EC5BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADE1D7BF-8986-4496-8D81-DD0935EC5BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54E0E09-7B7B-4FE6-A107-2BB20122EDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54E0E09-7B7B-4FE6-A107-2BB20122EDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54E0E09-7B7B-4FE6-A107-2BB20122EDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54E0E09-7B7B-4FE6-A107-2BB20122EDBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

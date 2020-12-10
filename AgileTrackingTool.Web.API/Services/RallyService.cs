@@ -1,9 +1,9 @@
-﻿using AgileTrackingTool.Web.API.Model;
+﻿using AgileTrackingTool.Web.API.Models;
 using Rally.RestApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace AgileTrackingTool.Web.API.Services
 {
@@ -16,22 +16,7 @@ namespace AgileTrackingTool.Web.API.Services
             restApi = new RallyRestApi();
         }
 
-        public UseStoriesDetails GetAllDetailsIteration()
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserInfo GetCurrentUserInfo()
-        {
-            throw new NotImplementedException();
-        }
-
         public ProjectDetails GetProjectDetails(string projectName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UseStoriesDetails GetStoriesByUser(string username)
         {
             throw new NotImplementedException();
         }
@@ -45,6 +30,35 @@ namespace AgileTrackingTool.Web.API.Services
             }
 
             return true;
+        }
+
+        public IEnumerable<UserStoriesDetails> GetStoriesByUser(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserStoriesDetails> GetAllDetailsIteration()
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserInfo GetCurrentUserInfo(string username, string password)
+        {
+            UserInfo userInfo;
+            restApi.Authenticate(username, password, serverUrl, proxy: null, allowSSO: false);
+            if (restApi.AuthenticationState == RallyRestApi.AuthenticationResult.Authenticated)
+            {
+                userInfo = new UserInfo();
+                var response = restApi.GetCurrentUser();
+                userInfo.EmailAddress = response["EmailAddress"];
+                userInfo.FirstName = response["FirstName"];
+                userInfo.LastName = response["LastName"];
+                userInfo.UserName = response["UserName"];
+
+                return userInfo;
+            }
+
+            return null;
         }
     }
 }
