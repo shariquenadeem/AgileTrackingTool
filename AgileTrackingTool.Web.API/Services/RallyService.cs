@@ -24,10 +24,11 @@ namespace AgileTrackingTool.Web.API.Services
             var workspace = rally.GetAllWorkSpaces().Results.First();
             var projects = rally.GetAllProjects(workspace);
             var atlas = rally.GetProject(projectName, projects);
-
+            var defects = rally.GetAllDefects();
             ProjectDetails projectDetails = new ProjectDetails();
             projectDetails.TotalIteration = rally.GetItrs(atlas).Results.Count;
             projectDetails.TotalUsers = rally.GetAllTeamMembers(atlas).Results.Count;
+            //projectDetails.TotalDefects = rally.GetAllTeamMembers(atlas).Results.Count;
 
             return projectDetails;
         }

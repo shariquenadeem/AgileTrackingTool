@@ -25,8 +25,8 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var res = _serviceClientManager.IsAuthorizeUser(objuserlogin.UserName, objuserlogin.UserPassword);
-                if (res)
+                var response = _serviceClientManager.IsAuthorizeUser(objuserlogin.UserName, objuserlogin.UserPassword);
+                if (response)
                 {
                     return RedirectToAction("Index", "Home");
                 }
