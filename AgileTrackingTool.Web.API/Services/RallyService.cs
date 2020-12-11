@@ -75,31 +75,37 @@ namespace AgileTrackingTool.Web.API.Services
 
         public IEnumerable<UserStoriesDetails> GetStoriesByUser(string username, string password)
         {
-            restApi.Authenticate(username, password, serverUrl, proxy: null, allowSSO: false);
-
             List<UserStoriesDetails> allUserStoriesDetails = new List<UserStoriesDetails>();
-            String projectRef = "/project/27874475461";
 
-            Request sRequest = new Request("HierarchicalRequirement");
-            sRequest.Project = projectRef;
-            sRequest.Query = new Query("Owner", Query.Operator.Equals, username);
-            sRequest.Limit = 10000;
-            QueryResult queryResults = restApi.Query(sRequest);
-
-            foreach (var s in queryResults.Results)
+            restApi.Authenticate(username, password, serverUrl, proxy: null, allowSSO: false);
+            if (restApi.AuthenticationState != RallyRestApi.AuthenticationResult.Authenticated)
             {
-                UserStoriesDetails userStoriesDetails = new UserStoriesDetails();
-                userStoriesDetails.AssignedOwner = s["Owner"]["_refObjectName"];
-                userStoriesDetails.Description = s["Description"];
-                userStoriesDetails.Name = s["Name"];
-                userStoriesDetails.Id = s["FormattedID"];
-                userStoriesDetails.CreatedDate = s["CreationDate"];
-                userStoriesDetails.UpdatedDate = s["LastUpdateDate"];
-                userStoriesDetails.Status = s["ScheduleState"];
 
-                userStoriesDetails.Tasks = null;
+            }
+            else
+            {
+                String projectRef = "/project/27874475461";
+                Request sRequest = new Request("HierarchicalRequirement");
+                sRequest.Project = projectRef;
+                sRequest.Query = new Query("Owner", Query.Operator.Equals, username);
+                sRequest.Limit = 10000;
+                QueryResult queryResults = restApi.Query(sRequest);
 
-                allUserStoriesDetails.Add(userStoriesDetails);
+                foreach (var s in queryResults.Results)
+                {
+                    UserStoriesDetails userStoriesDetails = new UserStoriesDetails();
+                    userStoriesDetails.AssignedOwner = s["Owner"]["_refObjectName"];
+                    userStoriesDetails.Description = s["Description"];
+                    userStoriesDetails.Name = s["Name"];
+                    userStoriesDetails.Id = s["FormattedID"];
+                    userStoriesDetails.CreatedDate = s["CreationDate"];
+                    userStoriesDetails.UpdatedDate = s["LastUpdateDate"];
+                    userStoriesDetails.Status = s["ScheduleState"];
+
+                    userStoriesDetails.Tasks = null;
+
+                    allUserStoriesDetails.Add(userStoriesDetails);
+                }
             }
             return allUserStoriesDetails.Count > 0 ? allUserStoriesDetails : null;
         }

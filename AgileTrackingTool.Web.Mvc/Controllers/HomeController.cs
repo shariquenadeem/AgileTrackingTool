@@ -15,6 +15,7 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IServiceClientManager _serviceClientManager = new ServiceClientManager();
+        public UserViewModelBase UserViewModelBase { get; set; }
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -26,7 +27,16 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
             var username = HttpContext.Session.GetString("UserName");
             var password = HttpContext.Session.GetString("UserPassword");
             var projectName = "Sales ART - Team Calypso";
-            var response = _serviceClientManager.GetProjectDetails(username, password, projectName);
+            var projectResponse = _serviceClientManager.GetProjectDetails(username, password, projectName);
+            var response = new ProjectDetails
+            {
+                TotalIteration = projectResponse.TotalIteration,
+                TotalUserStories = projectResponse.TotalUserStories,
+                TotalUsers = projectResponse.TotalUsers,
+                TotalDefects = projectResponse.TotalDefects,
+                UserName = HttpContext.Session.GetString("UserName")
+            };
+
             return View(response);
         }
 

@@ -32,6 +32,16 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
                 {
                     HttpContext.Session.SetString("UserName", objuserlogin.UserName);
                     HttpContext.Session.SetString("UserPassword", objuserlogin.UserPassword);
+                    //var userInfo = _serviceClientManager.GetCurrentUserInfo(objuserlogin.UserName, objuserlogin.UserPassword);
+
+                    //if (userInfo != null)
+                    //{
+                    //    var viewModel = new UserViewModelBase();
+                    //    viewModel.FirstName = userInfo.FirstName;
+                    //    viewModel.LastName = userInfo.LastName;
+                    //    viewModel.UserName = userInfo.UserName;
+                    //}
+
                     return RedirectToAction("Index", "Home");
                 }
 

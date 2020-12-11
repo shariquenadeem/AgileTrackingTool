@@ -61,9 +61,25 @@ namespace AgileTrackingTool.Web.Mvc.Services
             }
         }
 
-        public IEnumerable<UserStoriesDetails> GetStoriesByUser(string username)
+        public IList<UserStoriesDetails> GetStoriesByUser(string username, string password)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(serverUrl);
+                var responseTask = client.GetAsync(string.Concat(serverUrl, (string.Format("userstories/{0}/{1}", username, password))));
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+
+                    return JsonConvert.DeserializeObject<UserStoriesDetails[]>(readTask.Result);
+                }
+
+                return new List<UserStoriesDetails>();
+            }
         }
 
         public bool IsAuthorizeUser(string username, string password)
