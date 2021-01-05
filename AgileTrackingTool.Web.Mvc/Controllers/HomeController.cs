@@ -40,7 +40,9 @@ namespace AgileTrackingTool.Web.Mvc.Controllers
             return View(response);
         }
 
-        public IActionResult Privacy()
+
+
+        public IActionResult ProjectDetails()
         {
             return View();
         }

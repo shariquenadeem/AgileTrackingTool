@@ -42,9 +42,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href=@Url.Action("Index","User") class="nav-link">User Info</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+                @*<li class="nav-item d-none d-sm-inline-block">
+                    <a href="@Url.Action("ProjectDetails","Home")" class="nav-link">Project-wise Status</a>
+                </li>*@
             </ul>
 
             <!-- SEARCH FORM -->
@@ -146,11 +146,11 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                @*<li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                <li class="nav-item">
+                    <a class="nav-link btn-outline-primary" href=@Url.Action("Index","Login") role="button">
+                        <i class="fas fa-th-large">Log Out</i>
                     </a>
-                </li>*@
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -206,10 +206,10 @@
         </div>
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href=#>2020 - AgileTrackingTool</a>.</strong>
+            <strong>Copyright &copy; 2020 <a href=#>AgileTrackingTool</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.5
+                <b>Version</b> 1.0.0
             </div>
         </footer>
 

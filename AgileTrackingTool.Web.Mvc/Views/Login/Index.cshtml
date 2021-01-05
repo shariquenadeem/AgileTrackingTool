@@ -1,82 +1,106 @@
 ﻿@model AgileTrackingTool.Web.Mvc.Models.LoginModel
+
 @{
     Layout = null;
 }
-
-<script language="javascript">
-</script>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        .bs-example {
-            height: 220px;
-        }
-
-        .centerlook {
-            padding-left: 400px;
-            font-weight: bold;
-            width: 1000px;
-        }
-
-        .error {
-            padding-left: 400px;
-            font-weight: bold;
-            width: 1000px;
-            color: red;
-        }
-
-        .loginbtn {
-            padding-left: 500px;
-        }
-    </style>
-
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
 </head>
 <body>
-
+    <h2>Welcome to Agile Tracking Tool</h2>
     @using (Html.BeginForm())
     {
-        <div class="bs-example" style="border:2px solid gray;">
+        <div class="limiter" style="margin: -95px auto;">
+            <div class="container-login100">
+                <div class="wrap-login100 p-t-85 p-b-20">
+                    <form class="login100-form validate-form">
 
-            <div class="form-group centerlook">
-                <h1> Login </h1>
-            </div>
-            <div class="form-group centerlook">
-                <label>User Name: </label>
-                @Html.EditorFor(model => model.UserName)
-                @Html.ValidationMessageFor(model => model.UserName)
-            </div>
-            <div class="form-group centerlook">
-                <label>Password:</label>
-                @Html.PasswordFor(model => model.UserPassword)
-                @Html.ValidationMessageFor(model => model.UserPassword)
+                        <span class="login100-form-avatar" style="width:300px; height:180px">
+                            <img src="images/tsys.png" alt="AVATAR">
+                        </span>
+                        @*<div class="form-group centerlook">
+                                <label>User Name: </label>
+                                @Html.EditorFor(model => model.UserName)
+                                @Html.ValidationMessageFor(model => model.UserName)
+                            </div>
+                            <div class="form-group centerlook">
+                                <label>Password:</label>
+                                @Html.PasswordFor(model => model.UserPassword)
+                                @Html.ValidationMessageFor(model => model.UserPassword)
 
-            </div>
-            <div class="form-group error">
-                @if (@ViewBag.Failedcount != null)
-                {
-                    <label> Failed Attempt count is: @ViewBag.Failedcount</label>
-                }
+                            </div>*@
+                        <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
+                            @* <input class="input100" type="text" name="UserName">*@
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "UserName" })
+                            <span class="focus-input100"></span>
 
-                @if (@ViewBag.NotValidUser != null)
-                {
-                    <label> @ViewBag.NotValidUser</label>
-                }
-            </div>
-            <div class="loginbtn">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+
+                        <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                            @Html.PasswordFor(model => model.UserPassword, new { placeholder = "Password" })
+                            @*<input class="input100" type="password" name=@Model.UserPassword>*@
+                            <span class="focus-input100"></span>
+
+                            @Html.ValidationMessageFor(model => model.UserPassword)
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            @*<button class="login100-form-btn">
+                                    Login
+                                </button>*@
+                            <input type="submit" value="Login" class="login100-form-btn" style=" background-color: #004085" />
+                        </div>
+
+
+                    </form>
+                </div>
             </div>
         </div>
     }
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+
 </body>
 </html>
